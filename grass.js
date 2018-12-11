@@ -1,4 +1,9 @@
-class Grass  extends grass.js{
+
+
+var LivingCreature = require("./livingcreature.js")
+
+
+module.exports =  class Grass  extends LivingCreature{
     constructor(x, y, index) {
         this.x = x;
         this.y = y;
