@@ -1,31 +1,31 @@
 
 
-var m = Math.round((Math.random() * 20) + 5)
-var n = Math.round((Math.random() * 20) + 5)
-var matrix = []
-var side = 60
-function getRandInt(max) {
-  return Math.round(Math.random() * Math.floor(max))
-}
-for (var y = 0; y < m; y++) {
-  matrix[y] = []
-  for (var x = 0; x < n; x++) {
+// var m = Math.round((Math.random() * 20) + 5)
+// var n = Math.round((Math.random() * 20) + 5)
+// var matrix = []
+// var side = 60
+// function getRandInt(max) {
+//   return Math.round(Math.random() * Math.floor(max))
+// }
+// for (var y = 0; y < m; y++) {
+//   matrix[y] = []
+//   for (var x = 0; x < n; x++) {
 
 
 
 
 
-    matrix[y].push(getRandInt(6))
+//     matrix[y].push(getRandInt(6))
 
 
 
 
 
-  }
-} console.log(matrix)
+//   }
+// } console.log(matrix)
 
 
-var side = 10;
+// var side = 10;
 
 var grassArr = [];
 var xotakerArr = [];

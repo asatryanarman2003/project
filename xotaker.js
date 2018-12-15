@@ -1,7 +1,11 @@
 
 
 
-class xotaker {
+
+var LivingCreature = require("./livingcreature.js")
+
+
+module.exports = class grass extends LivingCreature {
     constructor(x, y, index) {
         this.x = x;
         this.y = y;
@@ -75,7 +79,7 @@ class xotaker {
     move() {
 
         var empty = random(this.chooseCell(0));
-        this.energy -=2
+        this.energy -= 2
 
         if (empty) {
             var newX = empty[0];

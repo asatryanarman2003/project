@@ -1,35 +1,79 @@
+var express = require('express');
+var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 
-var Grass = require("./grass.js");
+var grass = require("./grass.js");
 var xotaker = require("./xotaker.js");
 var gishatich = require("./gishatich.js");
 var vorsord = require("./vorsord.js");
 var vostikan = require("./vostikan.js");
 
-
-
-var m = Math.round((Math.random() * 20) + 5)
-var n = Math.round((Math.random() * 20) + 5)
-var matrix = []
-var side = 60
-function getRandInt(max) {
-  return Math.round(Math.random() * Math.floor(max))
+function random(max){
+  return Math.round(Math.random()*max);
 }
-for (var y = 0; y < m; y++) {
-  matrix[y] = []
-  for (var x = 0; x < n; x++) {
+
+function getrandom(max){
+  return Math.floor(Math.random()*max);
+}
 
 
-
-
-
-    matrix[y].push(getRandInt(6))
-
-
-
-
-
+function genMatrix(w, h) {
+  var matrix = [];
+  for(var y = 0; y < h; y++) {
+      matrix[y] = [];
+      for(var x = 0; x < w; x++) {
+          var r = random(100);
+          if     (r < 20) r = 0;
+          else if(r < 65) r = 1;
+          else if(r < 90) r = 2;
+          else if(r < 100)r = 3;
+          matrix[y][x] = r;
+      }
   }
-} console.log(matrix)
+  return matrix;
+}
+
+
+app.use(express.static("."));
+app.get('/', function (req, res) {
+  res.redirect('index.html');
+});
+server.listen(3000);
+
+
+
+
+var grassArr = [], xotakerArr = [], gishatichArr = [];
+
+
+
+
+
+// var m = Math.round((Math.random() * 20) + 5)
+// var n = Math.round((Math.random() * 20) + 5)
+// var matrix = []
+// var side = 60
+// function getRandInt(max) {
+//   return Math.round(Math.random() * Math.floor(max))
+// }
+// for (var y = 0; y < m; y++) {
+//   matrix[y] = []
+//   for (var x = 0; x < n; x++) {
+
+
+
+
+
+//     matrix[y].push(getRandInt(6))
+
+
+
+
+
+//   }
+// } 
+console.log(matrix)
 
 
 
@@ -112,4 +156,11 @@ function drawServaerayin() {
 
 }
 
-setInterval(drawServaerayin,1000);
+setInterval(drawServaerayin, 1000);
+
+
+
+
+
+
+

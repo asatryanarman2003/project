@@ -1,9 +1,9 @@
 
 
-var LivingCreature = require("./livingcreature.js")
+var livingcreature = require("./livingcreature.js")
 
 
-module.exports =  class Grass  extends LivingCreature{
+module.exports = class grass extends livingcreature {
     constructor(x, y, index) {
         this.x = x;
         this.y = y;

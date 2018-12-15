@@ -1,4 +1,8 @@
-class vostikan {
+
+var LivingCreature = require("./livingcreature.js")
+
+
+module.exports = class vostikan extends LivingCreature {
     constructor(x, y, index) {
         this.x = x;
         this.y = y;
