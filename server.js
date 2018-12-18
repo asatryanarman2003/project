@@ -1,35 +1,35 @@
 var express = require('express');
 var app = express();
-var server = require('http').Server(app);
+server = require('http').Server(app);
 var io = require('socket.io')(server);
 
-var grass = require("./grass.js");
-var xotaker = require("./xotaker.js");
-var gishatich = require("./gishatich.js");
-var vorsord = require("./vorsord.js");
-var vostikan = require("./vostikan.js");
+grass = require("./grass.js");
+xotaker = require("./xotaker.js");
+gishatich = require("./gishatich.js");
+vorsord = require("./vorsord.js");
+vostikan = require("./vostikan.js");
 
-function random(max){
-  return Math.round(Math.random()*max);
+function random(max) {
+  return Math.round(Math.random() * max);
 }
 
-function getrandom(max){
-  return Math.floor(Math.random()*max);
+function getrandom(max) {
+  return Math.floor(Math.random() * max);
 }
+matrix = getMatrix(40, 40);
 
-
-function genMatrix(w, h) {
+function getMatrix(w, h) {
   var matrix = [];
-  for(var y = 0; y < h; y++) {
-      matrix[y] = [];
-      for(var x = 0; x < w; x++) {
-          var r = random(100);
-          if     (r < 20) r = 0;
-          else if(r < 65) r = 1;
-          else if(r < 90) r = 2;
-          else if(r < 100)r = 3;
-          matrix[y][x] = r;
-      }
+  for (var y = 0; y < h; y++) {
+    matrix[y] = [];
+    for (var x = 0; x < w; x++) {
+      var r = random(100);
+      if (r < 20) r = 0;
+      else if (r < 65) r = 1;
+      else if (r < 90) r = 2;
+      else if (r < 100) r = 3;
+      matrix[y][x] = r;
+    }
   }
   return matrix;
 }
@@ -44,36 +44,29 @@ server.listen(3000);
 
 
 
-var grassArr = [], xotakerArr = [], gishatichArr = [];
+var grassArr = [], xotakerArr = [], gishatichArr = [], vorsordArr = [], vostikanArr = [];
 
 
 
+weather = "summer"
+function changeWeather() {
+  if (weather = "spring") {
+    weather = "summer"
+  }
+  if (weather = "summer") {
+    weather = "autumn"
+  }
+  if (weather = "autumn") {
+    weather = "winter"
+  }
+  if (weather = "winter") {
+    weather = "spring"
+  }
+  io.sockets.emit(weather)
+}
+setInterval(changeWeather, 10000)
 
 
-// var m = Math.round((Math.random() * 20) + 5)
-// var n = Math.round((Math.random() * 20) + 5)
-// var matrix = []
-// var side = 60
-// function getRandInt(max) {
-//   return Math.round(Math.random() * Math.floor(max))
-// }
-// for (var y = 0; y < m; y++) {
-//   matrix[y] = []
-//   for (var x = 0; x < n; x++) {
-
-
-
-
-
-//     matrix[y].push(getRandInt(6))
-
-
-
-
-
-//   }
-// } 
-console.log(matrix)
 
 
 
@@ -89,7 +82,7 @@ var vostikanArr = [];
 for (var y = 0; y < matrix.length; y++) {
   for (var x = 0; x < matrix[y].length; x++) {
     if (matrix[y][x] == 1) {
-      var gr = new Grass(x, y)
+      var gr = new grass(x, y)
       grassArr.push(gr)
     }
     else if (matrix[y][x] == 2) {
@@ -152,8 +145,9 @@ function drawServaerayin() {
     vostikanArr[i].move();
     vostikanArr[i].eat();
     vostikanArr[i].die();
-  }
 
+  }
+  io.sockets.emit("send matrix", matrix)
 }
 
 setInterval(drawServaerayin, 1000);
