@@ -1,61 +1,17 @@
-
 var LivingCreature = require("./livingcreature.js")
 
 
-module.exports =  class gishatich  extends LivingCreature{
-    constructor(x, y, index) {
-        this.x = x;
-        this.y = y;
-        this.index = index;
+module.exports = class gishatich extends LivingCreature {
+    constructor(x, y) {
+        super(x, y);
         this.energy = 30;
-        this.directions = [
-            [this.x - 1, this.y - 1],
-            [this.x, this.y - 1],
-            [this.x + 1, this.y - 1],
-            [this.x - 1, this.y],
-            [this.x + 1, this.y],
-            [this.x - 1, this.y + 1],
-            [this.x, this.y + 1],
-            [this.x + 1, this.y + 1]
-        ];
-
 
 
     }
 
-    getNewDirections() {
-        this.directions = [
-            [this.x - 1, this.y - 1],
-            [this.x, this.y - 1],
-            [this.x + 1, this.y - 1],
-            [this.x - 1, this.y],
-            [this.x + 1, this.y],
-            [this.x - 1, this.y + 1],
-            [this.x, this.y + 1],
-            [this.x + 1, this.y + 1]
-        ];
-    }
-
-
-    chooseCell(character) {
-        this.getNewDirections()
-        var found = [];
-        for (var i in this.directions) {
-            var x = this.directions[i][0];
-            var y = this.directions[i][1];
-
-
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                if (matrix[y][x] == character) {
-                    found.push(this.directions[i]);
-                }
-            }
-        }
-        return found;
-    }
 
     mult() {
-        var empty = random(this.chooseCell(0))
+        var empty = empty[Math.floor(Math.random()*items.length)];
 
         if (empty && this.energy > 60) {
             var empty = random(this.chooseCell(0));
@@ -88,7 +44,7 @@ module.exports =  class gishatich  extends LivingCreature{
 
         }
     }
-  
+
     eat() {
         var food = random(this.chooseCell(2));
         if (food) {
@@ -106,7 +62,7 @@ module.exports =  class gishatich  extends LivingCreature{
             this.y = newY;
             this.energy += 2;
         }
-    } 
+    }
 
     eat1() {
         var food = random(this.chooseCell(4));
@@ -145,7 +101,7 @@ module.exports =  class gishatich  extends LivingCreature{
     //         this.y = newY;
     //         this.energy += 2;
     // }
-    
+
 
 
 
@@ -166,7 +122,7 @@ module.exports =  class gishatich  extends LivingCreature{
     //             this.y = newY;
     //             this.energy += 2;
     //         }
-    
+
 
 
     die() {

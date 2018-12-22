@@ -1,7 +1,21 @@
+var grassArr = [], xotakerArr = [], gishatichArr = [], vorsordArr = [], vostikanArr = [];
+weather = "summer"
+
 var express = require('express');
 var app = express();
 server = require('http').Server(app);
 var io = require('socket.io')(server);
+
+
+
+
+app.use(express.static("."));
+app.get('/', function (req, res) {
+  res.redirect('index.html');
+});
+server.listen(3000);
+
+io.on('connection', function (socket) { })
 
 grass = require("./grass.js");
 xotaker = require("./xotaker.js");
@@ -9,7 +23,7 @@ gishatich = require("./gishatich.js");
 vorsord = require("./vorsord.js");
 vostikan = require("./vostikan.js");
 
-function random(min) {
+function Random(min) {
   return Math.round(Math.random() * min);
 }
 
@@ -23,7 +37,7 @@ function getMatrix(w, h) {
   for (var y = 0; y < h; y++) {
     matrix[y] = [];
     for (var x = 0; x < w; x++) {
-      var r = random(100);
+      var r = Random(100);
       if (r < 20) r = 0;
       else if (r < 65) r = 1;
       else if (r < 90) r = 2;
@@ -33,51 +47,6 @@ function getMatrix(w, h) {
   }
   return matrix;
 }
-
-
-app.use(express.static("."));
-app.get('/', function (req, res) {
-  res.redirect('index.html');
-});
-server.listen(3000);
-
-
-
-
-var grassArr = [], xotakerArr = [], gishatichArr = [], vorsordArr = [], vostikanArr = [];
-
-
-
-weather = "summer"
-function changeWeather() {
-  if (weather == "spring") {
-    weather = "summer";
-  }
-  if (weather == "summer") {
-    weather = "autumn"
-  }
-  if (weather == "autumn") {
-    weather = "winter"
-  }
-  if (weather == "winter") {
-    weather = "spring"
-  }
-  io.sockets.emit(weather)
-}
-setInterval(changeWeather, 10000)
-
-
-
-
-
-
-var grassArr = [];
-var xotakerArr = [];
-var gishatichArr = [];
-var vorsordArr = [];
-var vostikanArr = [];
-
-
 
 for (var y = 0; y < matrix.length; y++) {
   for (var x = 0; x < matrix[y].length; x++) {
@@ -103,10 +72,6 @@ for (var y = 0; y < matrix.length; y++) {
     }
   }
 }
-
-
-
-
 
 
 function drawServaerayin() {
@@ -147,14 +112,28 @@ function drawServaerayin() {
     vostikanArr[i].die();
 
   }
-  io.sockets.emit("send matrix", matrix,weather)
+  io.sockets.emit("send matrix", matrix, weather)
 }
 
 setInterval(drawServaerayin, 1000);
+setInterval(changeWeather, 10000)
 
 
-
-
+function changeWeather() {
+  if (weather == "spring") {
+    weather = "summer";
+  }
+  if (weather == "summer") {
+    weather = "autumn"
+  }
+  if (weather == "autumn") {
+    weather = "winter"
+  }
+  if (weather == "winter") {
+    weather = "spring"
+  }
+  io.sockets.emit(weather)
+}
 
 
 

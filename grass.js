@@ -1,20 +1,17 @@
 
 
-var livingcreature = require("./livingcreature.js")
+var livingcreature = require("./livingcreature.js");
 
 
 module.exports = class grass extends livingcreature {
     constructor(x, y) {
         super(x,y)
            this.multiply = 0;
-       
-        
-
     }
     
 
     mult() {
-        var empty = random(this.chooseCell(0))
+        var empty = items[Math.floor(Math.random()*items.length)];
         this.multiply++;
         if (empty && this.multiply > 4) {
             var empty = random(this.chooseCell(0));
