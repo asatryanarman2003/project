@@ -5,7 +5,6 @@ module.exports =  class vorsord  extends LivingCreature {
     constructor(x, y, index) {
         this.x = x;
         this.y = y;
-        this.index = index;
         this.energy = 30;
         this.directions = [
             [this.x - 1, this.y - 1],

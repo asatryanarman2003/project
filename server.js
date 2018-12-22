@@ -9,8 +9,8 @@ gishatich = require("./gishatich.js");
 vorsord = require("./vorsord.js");
 vostikan = require("./vostikan.js");
 
-function random(max) {
-  return Math.round(Math.random() * max);
+function random(min) {
+  return Math.round(Math.random() * min);
 }
 
 function getrandom(max) {
@@ -50,16 +50,16 @@ var grassArr = [], xotakerArr = [], gishatichArr = [], vorsordArr = [], vostikan
 
 weather = "summer"
 function changeWeather() {
-  if (weather = "spring") {
-    weather = "summer"
+  if (weather == "spring") {
+    weather = "summer";
   }
-  if (weather = "summer") {
+  if (weather == "summer") {
     weather = "autumn"
   }
-  if (weather = "autumn") {
+  if (weather == "autumn") {
     weather = "winter"
   }
-  if (weather = "winter") {
+  if (weather == "winter") {
     weather = "spring"
   }
   io.sockets.emit(weather)
@@ -147,7 +147,7 @@ function drawServaerayin() {
     vostikanArr[i].die();
 
   }
-  io.sockets.emit("send matrix", matrix)
+  io.sockets.emit("send matrix", matrix,weather)
 }
 
 setInterval(drawServaerayin, 1000);
